@@ -198,7 +198,35 @@
 
 5. __生成一份自签名的代码证书，并总是信任该证书。这一步非常重要。__
 
-   __然后用`codesign`对`Navicat Premium.app`重签名。__
+   首先打开钥匙串app，在菜单栏找到 钥匙串访问 》证书助理 》 创建证书  
+
+   在创建证书界面需要填写以下信息
+   - **名称** : 证书的名称，可以随意填写，比如 navicat。记住这个名称，后面会用到
+   - **身份类型** : 选择自签名根证书
+   - **证书类型** : 选择代码证书
+
+   然后勾选 **“让我覆盖这些默认值”** ，继续。  
+
+   接下来回让你确认 **序列号**、**有效期(天数)**，证书默认有效期是365天，也就是1年后失效，建议改大点，比如 3650 天，确认无误后，继续 
+
+   在**证书信息界面**，填写个人信息，也可以不填，建议填写，继续
+   
+   在**密钥对信息界面**，密钥大小选择2048，算法选择RSA，继续
+
+   在**密钥使用扩展**界面中把所有功能都钩上,继续
+
+   在**已扩展的密钥使用扩展**界面中把所有功能都钩上,继续
+
+   在**基本约束扩展**界面什么都不勾选，继续
+
+   在**主题备用扩展**界面**取消勾选包括主题备用扩展名称**，继续
+
+   在**指定用于该证书的位置**界面选择**系统**，创建
+
+
+
+
+6. __然后用`codesign`对`Navicat Premium.app`重签名。__
 
    ```console
    $ codesign -f -s "Your self-signed code-sign certificate name" <path to Navicat Premium.app>
@@ -214,7 +242,7 @@
    $ codesign -f -s "foobar" /Applications/Navicat\ Premium.app/
    ```
 
-6. 接下来使用`navicat-keygen`来生成 __序列号__ 和 __激活码__。
+7. 接下来使用`navicat-keygen`来生成 __序列号__ 和 __激活码__。
 
    ```
    Usage:
@@ -278,13 +306,13 @@
  
    之后你会被要求填入请求码。注意 __不要关闭注册机__。
 
-7. __断开网络__ 并打开Navicat。
+8. __断开网络__ 并打开Navicat。
 
    找到`注册`窗口，填入注册机给你的序列号。然后点击`激活`按钮。
 
-8. 一般来说在线激活肯定会失败，这时候Navicat会询问你是否`手动激活`，直接选吧。
+9. 一般来说在线激活肯定会失败，这时候Navicat会询问你是否`手动激活`，直接选吧。
 
-9. 在`手动激活`窗口你会得到一个请求码，复制它并把它粘贴到keygen里。最后别忘了连按至少两下回车结束输入。
+10. 在`手动激活`窗口你会得到一个请求码，复制它并把它粘贴到keygen里。最后别忘了连按至少两下回车结束输入。
 
    ```console
    Your name: DoubleLabyrinth
@@ -303,7 +331,7 @@
    Vd4QUzEw6DPNpJLYVKV6ZNDny0gsZWCXbKyrf2nF27iTM35YUBouXEcAB/Vy355V2z++7iXe/coKmV4kNZbywlBchI5ts7gOHnhXWzBYQ3yKsBYKob/7sxaiw7CXCmhM4mPLMzrp5okewCWjBjb51keZ4SA3F6j8HGIVYiZW3CAZtkjxs9uUoXvVIJr+Gt83TgU+sqiC4oSplokopAql2zWPieA9KuhPoCKiGLMvuQwv0wWWPc2HorY0AHAetsyZ8MN4utZ2ylQ9z/ZojwX1KViyh3xxnjWF7xXJljIdBA4tCi4QDqDLvTuICfUV7VeKzOUY+ZKCO0xGxkTe1HVwog==
    ```
 
-10. 如果不出意外，你会得到一个看似用Base64编码的激活码。
+11. 如果不出意外，你会得到一个看似用Base64编码的激活码。
 
     直接复制它，并把它粘贴到Navicat的`手动激活`窗口，最后点`激活`按钮。
     
